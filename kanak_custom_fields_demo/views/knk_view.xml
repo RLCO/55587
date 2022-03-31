@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="knk_custom_model_view_tree" model="ir.ui.view">
+        <field name="name">knk.custom.model.tree.view</field>
+        <field name="model">custom.model</field>
+        <field name="arch" type="xml">
+            <tree string="Template">
+                <field name="knk_name" />
+                <field name="knk_roll_no" />
+            </tree>
+        </field>
+    </record>
+    <record id="knk_custom_model_view_form" model="ir.ui.view">
+        <field name="name">knk.custom.model.form.view</field>
+        <field name="model">custom.model</field>
+        <field name="arch" type="xml">
+            <form string="Template">
+                <sheet>
+                    <group>
+                        <field name="knk_name" />
+                        <field name="knk_roll_no" />
+                    </group>
+                    <group string='Many2one'>
+                        <field name="knk_partner" />
+                    </group>
+                    <group string='One2many'>
+                        <field name="knk_city_details" />
+                    </group>
+                    <notebook>
+                        <page string='Attendees'>
+                            <group string="Many2many">
+                                <field name="knk_attendee_ids" />
+                                <!--  widgets which can be used here are:
+                                1)<field name="attendee_ids" widget="many2many_tags"/>
+                                2)<field name="attendee_ids" widget="many2many_checkboxes"/>
+                                3)<field name="attendee_ids" widget="one2many_list"/> -->
+                            </group>
+                        </page>
+                        <page string='Attachments'>
+                            <group string="Many2many Attachments">
+                                <field name="knk_attachment_ids" widget="many2many_binary" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="knk_custom_model_menu_action" model="ir.actions.act_window">
+        <field name="name">Custom</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">custom.model</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="custom_model_menu" name="School" />
+    <menuitem id="custom_model_school_student_menu" parent="custom_model_menu" name="Student" action="knk_custom_model_menu_action" />
+</odoo>
